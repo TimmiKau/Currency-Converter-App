@@ -1,5 +1,6 @@
 package se.timmi;
 
+import java.sql.PreparedStatement;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -11,15 +12,20 @@ public class Main {
 
         Game plan
 
-        Welcome text
-        User input ( if else )
+
 
         A converter method
         Hold the currency math ( Sek can be the default )
         Pretty up formation
 
         Handle invalid input.
+        add the date and time
          */
+
+
+        double sekToUsd = 0.10524;
+        double sekToEuro = 0.09061;
+
         //Welcome text
         System.out.println("Currency Converter App");
         System.out.println("1. Convert SEK to USD");
@@ -35,31 +41,45 @@ public class Main {
         System.out.println("Enter Amount to Convert:");
         String userInputAmount = scanner.nextLine();
 
+
+
         switch (userInputChoice) {
             case "1":
-                Converter(userInputAmount , 1);
+                Converter(userInputAmount , sekToUsd , true);
                 break;
             case "2":
-                Converter(userInputAmount , 2);
+                Converter(userInputAmount , sekToEuro  ,  true);
                 break;
-
             case "3":
-                Converter(userInputAmount , 3);
+                Converter(userInputAmount , sekToUsd , false);
                 break;
-
             case "4":
-                Converter(userInputAmount , 4);
+                Converter(userInputAmount , sekToEuro , false);
                 break;
-
             case "0":
                 break;
         }
     }
 
-    public static void  Converter(String amount , int math){
+    public static void  Converter(String amount , double math, boolean multiply){
 
-        System.out.println(amount + " " + math);
+        try {
 
+            double amountValue = Double.parseDouble(amount );
+            double result = 0;
+
+            if ( multiply == true ) {
+
+                result = amountValue * math;
+                System.out.printf("Result: %.2f" , result);
+
+            } else {
+                result = amountValue / math;
+                System.out.printf("Result: %.2f" , result);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid Number. Please try again");
+        }
     }
 
 }
