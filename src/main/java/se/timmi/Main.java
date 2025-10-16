@@ -1,6 +1,5 @@
 package se.timmi;
 
-import java.sql.PreparedStatement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -67,7 +66,7 @@ public class Main {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedDate = now.format(formatter);
 
-            if ( multiply == true ) {
+            if ( multiply ) {
 
                 result = amountValue * math;
                 System.out.printf("Result: %.2f (Form %s)%n" , result , formattedDate);
