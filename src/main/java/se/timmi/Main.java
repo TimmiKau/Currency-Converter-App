@@ -1,5 +1,7 @@
 package se.timmi;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -12,9 +14,13 @@ public class Main {
         double sekToUsd = 0.10524;
         double sekToEuro = 0.09061;
         boolean runLoop = true;
+        double result = 0.0;
+        String fromCurrency="";
+        String toCurrency="";
 
         while (runLoop) {
             //Welcome text
+            System.out.println(" ");
             System.out.println("Currency Converter App");
             System.out.println("1. Convert SEK to USD");
             System.out.println("2. Convert SEK to Euro");
@@ -34,53 +40,48 @@ public class Main {
             System.out.println("Enter Amount to Convert:");
             String userInputAmount = scanner.nextLine();
 
+            Converter converter = new Converter();
+
+
 
             switch (userInputChoice) {
                 case "1":
-                    Converter(userInputAmount, sekToUsd, true);
+                    result = converter.Converter(userInputAmount, sekToUsd, true);
+                    fromCurrency = "SEK";
+                    toCurrency = "USD";
                     break;
                 case "2":
-                    Converter(userInputAmount, sekToEuro, true);
+                    result =converter.Converter(userInputAmount, sekToEuro, true);
+                    fromCurrency = "SEK";
+                    toCurrency = "EURO";
                     break;
                 case "3":
-                    Converter(userInputAmount, sekToUsd, false);
+                    result =converter.Converter(userInputAmount, sekToUsd, false);
+                    fromCurrency = "USD";
+                    toCurrency = "SEK";
                     break;
                 case "4":
-                    Converter(userInputAmount, sekToEuro, false);
+                    result =converter.Converter(userInputAmount, sekToEuro, false);
+                    fromCurrency = "EURO";
+                    toCurrency = "SEK";
                     break;
                 default:
-                    System.out.println("Try again");
+                    System.out.println("Incorrect Currency - Try again");
                     break;
             }
-        }
 
-    }
+            if ( result!= 0) {
+                NumberFormat numberFormat = new DecimalFormat("0.00");
 
-    public static void  Converter(String amount , double math, boolean multiply){
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                String formattedDate = now.format(formatter);
 
-        try {
-
-            double amountValue = Double.parseDouble(amount );
-            amountValue = Math.abs (amountValue);
-            double result = 0;
-            LocalDateTime now = LocalDateTime.now();
-
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDate = now.format(formatter);
-
-            if ( multiply ) {
-
-                result = amountValue * math;
-                System.out.printf("Result: %.2f (Form %s)%n" , result , formattedDate);
-
-            } else {
-                result = amountValue / math;
-                System.out.printf("Result: %.2f (Form %s)%n" , result , formattedDate);
+                System.out.println(
+                        fromCurrency + " " + userInputAmount + " to "
+                        + toCurrency + " " + numberFormat.format(result) +
+                        " (Created " +  formattedDate + ")");
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid Number. Please try again");
         }
     }
-
 }
