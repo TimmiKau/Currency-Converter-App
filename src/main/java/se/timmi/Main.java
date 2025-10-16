@@ -11,40 +11,49 @@ public class Main {
 
         double sekToUsd = 0.10524;
         double sekToEuro = 0.09061;
+        boolean runLoop = true;
 
-        //Welcome text
-        System.out.println("Currency Converter App");
-        System.out.println("1. Convert SEK to USD");
-        System.out.println("2. Convert SEK to Euro");
-        System.out.println("3. Convert USD to SEK");
-        System.out.println("4. Convert Euro to SEK");
-        System.out.println("0. Exit");
-        System.out.println("Enter Your Choice:");
+        while (runLoop) {
+            //Welcome text
+            System.out.println("Currency Converter App");
+            System.out.println("1. Convert SEK to USD");
+            System.out.println("2. Convert SEK to Euro");
+            System.out.println("3. Convert USD to SEK");
+            System.out.println("4. Convert Euro to SEK");
+            System.out.println("0. Exit");
+            System.out.println("Enter Your Choice:");
 
-        Scanner scanner = new Scanner(System.in);
-        String userInputChoice = scanner.nextLine();
+            Scanner scanner = new Scanner(System.in);
+            String userInputChoice = scanner.nextLine();
 
-        System.out.println("Enter Amount to Convert:");
-        String userInputAmount = scanner.nextLine();
+            if (userInputChoice.equals("0")) {
+                runLoop = false;
+                continue;
+            }
+
+            System.out.println("Enter Amount to Convert:");
+            String userInputAmount = scanner.nextLine();
 
 
-
-        switch (userInputChoice) {
-            case "1":
-                Converter(userInputAmount , sekToUsd , true);
-                break;
-            case "2":
-                Converter(userInputAmount , sekToEuro  ,  true);
-                break;
-            case "3":
-                Converter(userInputAmount , sekToUsd , false);
-                break;
-            case "4":
-                Converter(userInputAmount , sekToEuro , false);
-                break;
-            case "0":
-                break;
+            switch (userInputChoice) {
+                case "1":
+                    Converter(userInputAmount, sekToUsd, true);
+                    break;
+                case "2":
+                    Converter(userInputAmount, sekToEuro, true);
+                    break;
+                case "3":
+                    Converter(userInputAmount, sekToUsd, false);
+                    break;
+                case "4":
+                    Converter(userInputAmount, sekToEuro, false);
+                    break;
+                default:
+                    System.out.println("Try again");
+                    break;
+            }
         }
+
     }
 
     public static void  Converter(String amount , double math, boolean multiply){
