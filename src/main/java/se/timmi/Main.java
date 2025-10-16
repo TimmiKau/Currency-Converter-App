@@ -9,13 +9,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        /*
-
-
-        add the date and time
-         */
-
-
         double sekToUsd = 0.10524;
         double sekToEuro = 0.09061;
 
@@ -59,6 +52,7 @@ public class Main {
         try {
 
             double amountValue = Double.parseDouble(amount );
+            amountValue = Math.abs (amountValue);
             double result = 0;
             LocalDateTime now = LocalDateTime.now();
 
