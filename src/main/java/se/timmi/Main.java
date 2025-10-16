@@ -1,6 +1,8 @@
 package se.timmi;
 
 import java.sql.PreparedStatement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -10,15 +12,7 @@ public class Main {
 
         /*
 
-        Game plan
 
-
-
-        A converter method
-        Hold the currency math ( Sek can be the default )
-        Pretty up formation
-
-        Handle invalid input.
         add the date and time
          */
 
@@ -67,15 +61,20 @@ public class Main {
 
             double amountValue = Double.parseDouble(amount );
             double result = 0;
+            LocalDateTime now = LocalDateTime.now();
+
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = now.format(formatter);
 
             if ( multiply == true ) {
 
                 result = amountValue * math;
-                System.out.printf("Result: %.2f" , result);
+                System.out.printf("Result: %.2f (Form %s)%n" , result , formattedDate);
 
             } else {
                 result = amountValue / math;
-                System.out.printf("Result: %.2f" , result);
+                System.out.printf("Result: %.2f (Form %s)%n" , result , formattedDate);
             }
         } catch (NumberFormatException e) {
             System.out.println("Invalid Number. Please try again");
